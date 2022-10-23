@@ -131,7 +131,7 @@
 
 ## 🎈以下就是Geek组后三阶段的考核任务啦！ 祝大家玩的开心！
 
-[![img](https://raw.githubusercontent.com/itawenya/pic/main/inspire.png)](https://raw.githubusercontent.com/itawenya/pic/main/inspire.png)
+![img](https://raw.githubusercontent.com/itawenya/pic/main/GM%408C%40%24%5DRI4U76Q5%5D%7DA%5B%40K9.png)
 
 ------
 
