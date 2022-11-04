@@ -1,9 +1,19 @@
 # GIT的学习与使用
+-------
+***学习背景***：什么，git是啥，一无所知<br>
+***学习目录***：<a name=back>(点击即可跳转)</a><br><a href=#t1>一、Git简介</a>💡💡
+<br><a href=#t2>二、Git原理</a>💡💡
+<br><a href=#t3>三、远程仓库</a>💡💡
+<br><a href=#t4>四、分支管理</a>💡💡
+<br>
 
-### 一、Git简介✨✨
+--------
+## <a name=t1>一、Git简介</a>💡💡
+<a href=#back>(返回目录）</a>
 ```
 1.git是目前世界上最先进的分布式版本控制器
-2.版本控制器：（我的理解）此版本是你所写文件的版本，每次修改便会产生一个新“版本”，版本控制器可以监测到版本之间的差异，记录每次修改的数据，还可以让其他人协作编辑
+2.版本控制器：（我的理解）此版本是你所写文件的版本，每次修改便会产生一个新“版本”，
+版本控制器可以监测到版本之间的差异，记录每次修改的数据，还可以让其他人协作编辑
 ```
 #### 1.Git的诞生✨
 
@@ -27,31 +37,33 @@
 
   历史就是这么偶然，如果不是当年BitMover公司威胁Linux社区，可能现在我们就没有免费而超级好用的Git了。
 #### 2.集中式和分布式（版本控制器）✨
-|     |网络|版本库位置|安全性|
-|:---:|:---:|:---:|:---:|
-|集中式|需联网|中央服务器|差|
-|分布式|不需联网|每人电脑都可以有|好|
+|        |   网络   |    版本库位置    | 安全性 |
+| :----: | :------: | :--------------: | :----: |
+| 集中式 |  需联网  |    中央服务器    |   差   |
+| 分布式 | 不需联网 | 每人电脑都可以有 |   好   |
 
 #### 3.下载git、创建版本库✨
 
 **git配置**：查看配置git config -l   & git/ect/gitconfig
 
-​				用户信息查看 git config --global user .name  "..." .email "..."
+				     用户信息查看 git config --global user .name  "..." .email "..."
 
-### 二、Git原理✨✨
-
+----------
+## <a name=t2>二、Git原理</a>💡💡
+<a href=#back>(返回目录）</a>
 #### 1.Git工作原理✨
 
 * git有三个工作区域：工作目录(workspace)、暂存区(stage/index)、资源库(local repositiry)，如果加上远程git仓库(romote repository)就可以算四个区，四个区之间转换关系如下：
 
-  ![7](E:\geek\image\7.jpg)
+![7](https://github.com/SnowSPomPom/Tasks/blob/main/image/7.jpg)
 
   （其中暂存区是隐藏目录）
-  
-  详情见[git的使用2（实操）]([Tasks/Git的使用2（实操）.md at main · SnowSPomPom/Tasks (github.com)](https://github.com/SnowSPomPom/Tasks/blob/main/Git的使用2（实操）.md))
 
-### 三、远程仓库✨✨
+  详情见[Tasks/Git的使用2（实操）](https://github.com/SnowSPomPom/Tasks/blob/main/Git的使用2（实操）.md)
 
+-----------
+## <a name=t3>三、远程仓库</a>💡💡
+<a href=#back>(返回目录）</a>
 ```
 首先添加一个SSH密钥
 ```
@@ -70,7 +82,7 @@
   
 * 推送文件
 
-  * 输入命令`git push "桥梁名称""仓库地址"`
+  * 输入命令`git push "主机名称""本地分支":"远程分支"`
 
 #### 2.从远程仓库克隆✨
 
@@ -78,30 +90,52 @@
 
 + 在要克隆过来的本地目录下运行git bash，输入命令`git clone "远程库地址"`即可完成克隆
 
-### 四、分支管理✨✨
+--------------
+## <a name=t4>四、分支管理</a>💡💡
+<a href=#back>(返回目录）</a>
+#### 1. 创建与合并分支✨
 
-#### 1. 创建与合并分支
-
-* 创建与合并分支的原理
+* **创建与合并分支的原理**
   * *（廖雪峰网站上的解释真的很清晰，就复制过来了）*
-  * 一开始的时候，`master`分支是一条线，Git用`master`指向最新的提交，再用`HEAD`指向`master`，就能确定当前分支，以及当前分支的提交点：  每次提交，`master`分支都会向前移动一步，这样，随着你不断提交，`master`分支的线也越来越长。
-  * 当我们创建新的分支，例如`dev`时，Git新建了一个指针叫`dev`，指向`master`相同的提交，再把`HEAD`指向`dev`，就表示当前分支在`dev`上：  你看，Git创建一个分支很快，因为除了增加一个`dev`指针，改改`HEAD`的指向，工作区的文件都没有任何变化！
-  * 不过，从现在开始，对工作区的修改和提交就是针对`dev`分支了，比如新提交一次后，`dev`指针往前移动一步，而`master`指针不变：
-  * 假如我们在`dev`上的工作完成了，就可以把`dev`合并到`master`上。Git怎么合并呢？最简单的方法，就是直接把`master`指向`dev`的当前提交，就完成了合并：  所以Git合并分支也很快！就改改指针，工作区内容也不变！
-  * 合并完分支后，甚至可以删除`dev`分支。删除`dev`分支就是把`dev`指针给删掉，删掉后，我们就剩下了一条`master`分支：
-* 创建与合并分支实操
-  * 首先，创建`SnowsP`分支,然后切换到该分支（`-b`表示创建并切换）
-  * 然后，用`git branch`命令查看当前分支（当前分支前会标一个*号）
-  * 然后，我们可以在分支上正常提交，如我们提交修改一点的“hello.md"，提交
-  * 现在，分支工作完成，我们可以切换会`master`分支
-  * 切换回`master`分支后，再查看一个`hello.md`文件，刚才添加的内容不见了！因为那个提交是在`snowsp`分支上，而`master`分支此刻的提交点并没有变
-  * 现在我们合并工作成果
-  * 合并完后就可以方向删掉分支了
+  * **一开始的时候**，`master`分支是一条线，Git用`master`指向最新的提交，再用`HEAD`指向`master`，就能确定当前分支，以及当前分支的提交点： 
+  
+  ![1.1](https://github.com/SnowSPomPom/Tasks/blob/main/image/git%E5%88%86%E6%94%AF/1.1.png)
+  
+    每次提交，`master`分支都会向前移动一步，这样，随着你不断提交，`master`分支的线也越来越长。
+  * **当我们创建新的分支**，例如`dev`时，Git新建了一个指针叫`dev`，指向`master`相同的提交，再把`HEAD`指向`dev`，就表示当前分支在`dev`上：  
+  
+  ![1.2](https://github.com/SnowSPomPom/Tasks/blob/main/image/git%E5%88%86%E6%94%AF/1.2.png)
+  
+    你看，Git创建一个分支很快，因为除了增加一个`dev`指针，改改`HEAD`的指向，工作区的文件都没有任何变化！
+  * **不过**，从现在开始，对工作区的修改和提交就是针对`dev`分支了，比如新提交一次后，`dev`指针往前移动一步，而`master`指针不变：
+  
+   ![1.3](https://github.com/SnowSPomPom/Tasks/blob/main/image/git%E5%88%86%E6%94%AF/1.3.png)
+  
+  * **假如我们在`dev`上的工作完成了**，就可以把`dev`合并到`master`上。Git怎么合并呢？最简单的方法，就是直接把`master`指向`dev`的当前提交，就完成了合并： 
+  
+   ![1.4](https://github.com/SnowSPomPom/Tasks/blob/main/image/git%E5%88%86%E6%94%AF/1.4.png)
+  
+    所以Git合并分支也很快！就改改指针，工作区内容也不变！
+  * **合并完分支后**，甚至可以删除`dev`分支。删除`dev`分支就是把`dev`指针给删掉，删掉后，我们就剩下了一条`master`分支：
+   ![1.5](https://github.com/SnowSPomPom/Tasks/blob/main/image/git%E5%88%86%E6%94%AF/1.5.png)<br>
+* **2.创建与合并分支实操**✨
+  * **首先**，创建`SnowsP`分支,然后切换到该分支（`-b`表示创建并切换）<br>
+   ![2.1](https://github.com/SnowSPomPom/Tasks/blob/main/image/git%E5%88%86%E6%94%AF/2.1.png)<br>
+  * **然后**，用`git branch`命令查看当前分支（当前分支前会标一个*号）<br>
+   ![1.2](https://github.com/SnowSPomPom/Tasks/blob/main/image/git%E5%88%86%E6%94%AF/2.2.png)<br>
+  * **然后**，我们可以在分支上正常提交，如我们提交修改一点的“hello.md"，提交<br>
+   ![1.2](https://github.com/SnowSPomPom/Tasks/blob/main/image/git%E5%88%86%E6%94%AF/2.3.png)<br>
+  * **现在**，分支工作完成，我们可以切换会`master`分支<br>
+   ![1.2](https://github.com/SnowSPomPom/Tasks/blob/main/image/git%E5%88%86%E6%94%AF/2.4.png)<br>
+  * **切换**回`master`分支后，再查看一个`hello.md`文件，刚才添加的内容不见了！因为那个提交是在`snowsp`分支上，而`master`分支此刻的提交点并没有变<br>
+  * **现在**我们合并工作成果<br>
+    ![1.2](https://github.com/SnowSPomPom/Tasks/blob/main/image/git%E5%88%86%E6%94%AF/2.5.png) <br>
+  * **合并完**后就可以方向删掉分支了<br>
+   ![1.2](https://github.com/SnowSPomPom/Tasks/blob/main/image/git%E5%88%86%E6%94%AF/2.6.png)<br>
   * 因为创建、合并和删除分支非常快，所以Git鼓励你使用分支完成某个任务，合并后再删掉分支，这和直接在`master`分支上工作效果是一样的，但过程更安全。
+-------
+ **参考资料**：廖雪峰网站、google、B站某git教程
 
 
 
 ​    
-
-
-
